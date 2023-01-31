@@ -1,3 +1,8 @@
+# v1.1
+# Changes
+1. Add caffeine for preventing sleep
+2. Add backup and restore menu option
+
 # v1.0
 ## What script does
 1. Check that script running in D folder
