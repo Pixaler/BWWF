@@ -1,3 +1,7 @@
+# v1.1.1
+# Changes
+1. Minor fixes and improvments
+
 # v1.1
 # Changes
 1. Add caffeine for preventing sleep

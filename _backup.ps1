@@ -1,7 +1,7 @@
 # Check that you in a D:\BWWF folder
 Write-Host "---Backup or restore?:---"
 Write-Host "."
-$setup_my_apps = Read-Host -Prompt "You options is (b/r): "
+$setup_my_apps = Read-Host -Prompt "You options is (b/r)"
 if ($setup_my_apps -like 'b') {
     # Close all apps
     Clear-Host
@@ -23,15 +23,20 @@ if ($setup_my_apps -like 'b') {
     Clear-Host
     Write-Host "---Add all to archive---"
     Write-Host "."
-    $date = Get-Date -Format "dd-MM-yyyy"
     Write-Host "."
-    ./7Zip/x64/7za.exe a !BACKUP($date).zip C:\!MOE C:\PortableApps C:\BATCH C:\Projects C:\!NOTES -oD:\!BACKUP -mx=5 -tzip # Add all folders to archive with 7za.exe
+    $date = Get-Date -UFormat "%d.%m.%Y"
+    $path1 = "..\!BACKUP(" + $date + ").zip"
+    $path2 = "..\!BACKUPDATA(" + $date+ ").zip"
+    ./7Zip/x64/7za.exe a $path1 C:\!MOE C:\PortableApps C:\BATCH -mx=5 -tzip # Add all folders to archive with 7za.exe
+	./7Zip/x64/7za.exe a $path2 D:\07_Projects D:\08_Notes -mx=5 -tzip # Add all folders to archive with 7za.exe
+	# Move-Item -Path "!BACKUP*.zip" -Destination "D:\!BACKUP"
+	# Move-Item -Path "!BACKUPDATA*.zip" -Destination "D:\!BACKUP"
     Start-Sleep -Seconds 5
-    Exit
+
 }
 if ($setup_my_apps -like 'r') {
     Write-Host "---Starting extract files---"
     Write-Host "."
-    ./7Zip/x64/7za.exe x D:\!BACKUP\!BACKUP*.zip -oD:\restore
+    ./7Zip/x64/7za.exe x D:\!BACKUP\!BACKUP*.zip -oC:\
     Exit
 }
