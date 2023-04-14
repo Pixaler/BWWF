@@ -29,14 +29,21 @@ if ($setup_my_apps -like 'b') {
     $path2 = "..\!BACKUPDATA(" + $date+ ").zip"
     ./7Zip/x64/7za.exe a $path1 C:\!MOE C:\PortableApps C:\BATCH -mx=5 -tzip # Add all folders to archive with 7za.exe
 	./7Zip/x64/7za.exe a $path2 D:\07_Projects D:\08_Notes -mx=5 -tzip # Add all folders to archive with 7za.exe
-	# Move-Item -Path "!BACKUP*.zip" -Destination "D:\!BACKUP"
-	# Move-Item -Path "!BACKUPDATA*.zip" -Destination "D:\!BACKUP"
     Start-Sleep -Seconds 5
 
 }
 if ($setup_my_apps -like 'r') {
+    Write-Host "---Choose archive---"
+    ls ../
+    Write-Host "."
+    Write-Host "."
+    $date = Read-Host -Prompt "Which archive you what to unpack(input date that in braket)"
+    Write-Host "."
+    Write-Host "."
     Write-Host "---Starting extract files---"
     Write-Host "."
-    ./7Zip/x64/7za.exe x D:\!BACKUP\!BACKUP*.zip -oC:\
+    Write-Host "."
+    $path_to_unpack = "D:\!BACKUP\!BACKUP(" + $date + ").zip"
+    ./7Zip/x64/7za.exe x $path_to_unpack -oC:\
     Exit
 }
